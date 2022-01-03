@@ -27686,3 +27686,5 @@ ALTER DEFAULT PRIVILEGES FOR ROLE fecdbuser IN SCHEMA public GRANT SELECT ON TAB
 -- PostgreSQL database dump complete
 --
 
+-- patch up a missing view
+create view forms_my_forms_view as select * from my_forms_view;

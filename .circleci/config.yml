@@ -59,17 +59,20 @@ jobs:
           working_directory: ~/project/db
 
       - run:
-          name: Test db data load
-          command: |
-            psql -h ${FECFILE_DB_HOST}  ${FECFILE_DB_NAME} ${FECFILE_DB_USERNAME} -c "select * from authentication_account" > out.txt
-          working_directory: ~/project/db
+          name: Create migrations
+          command: python manage.py makemigrations
+          working_directory: ~/project/django-backend/
 
-      - run: cat ~/project/db/out.txt
+      - run:
+          name: run migrations
+          # This assumes pytest is installed via the install-package step above
+          command: python manage.py migrate
+          working_directory: ~/project/django-backend/
 
       - run:
           name: Run tests
           # Use built-in Django test module
-          command: python manage.py test
+          command: python manage.py test --keep
           working_directory: ~/project/django-backend/
 
   lint-angular:
