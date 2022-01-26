@@ -15,7 +15,7 @@ jobs:
     # These next lines defines a Docker executors: https://circleci.com/docs/2.0/executor-types/
     # A list of available CircleCI Docker convenience images are available here: https://circleci.com/developer/images/image/cimg/python
     docker:
-      - image: cimg/python:3.7
+      - image: cimg/python:3.7-node
 
     steps:
       - checkout
@@ -93,10 +93,18 @@ jobs:
           working_directory: ~/project/django-backend/
 
       - run:
+          name: setup coverage dir
+          mkdir: ~/project/coverage-report
+
+      - run:
           name: Run tests
           # Use built-in Django test module
-          command: coverage run --source='.' manage.py test --keep || echo "test fails"
+          command: coverage xml -o ~/project/coverage-report/coverage.xml  --source='.' manage.py test --keep || echo "test fails"
           working_directory: ~/project/django-backend/
+
+      - run:
+          name: ls testsing
+          command: ls -l  ~/ && ls -l ~/project && ls -l ~/project/coverage-report
 
       - sonarcloud/scan
 
