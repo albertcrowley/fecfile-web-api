@@ -101,20 +101,20 @@ jobs:
 
       - run:
           name: setup coverage dir
-          command: mkdir ~/project/coverage-report
+          command: mkdir ~/project/coverage-reports
 
       - run:
           name: Make XML coverage report
-          command: coverage xml -o ~/project/coverage-report/coverage.xml
+          command: coverage xml -o ~/project/coverage-reports/coverage.xml
           working_directory: ~/project/django-backend
 
       - run:
           name: ls testsing
-          command: ls -l  ~/ && ls -l ~/project && ls -l ~/project/coverage-report
+          command: ls -l  ~/ && ls -l ~/project && ls -l ~/project/coverage-reports
 
       - run:
           name: cat coverage
-          command: cat ~/project/coverage-report/coverage.xml
+          command: cat ~/project/coverage-reports/coverage.xml
 
       - sonarcloud/scan
 
