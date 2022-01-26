@@ -43,6 +43,10 @@ TIME_ZONE = "America/New_York"
 CONTACT_MATCH_PERCENTAGE = 92
 
 
+if not 1 == 1:
+    print ("happy day")
+
+
 LOGIN_TIMEOUT_TIME = 15
 LOGIN_MAX_RETRY = 3
 REGISTER_USER_URL = os.environ.get('REGISTER_USER_URL', "http://localhost/#/register?register_token=")

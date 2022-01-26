@@ -112,6 +112,10 @@ jobs:
           name: ls testsing
           command: ls -l  ~/ && ls -l ~/project && ls -l ~/project/coverage-report
 
+      - run:
+          name: cat coverage
+          command: cat ~/project/coverage-report/coverage.xml
+
       - sonarcloud/scan
 
 # Invoke jobs via workflows
