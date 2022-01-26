@@ -94,7 +94,7 @@ jobs:
 
       - run:
           name: setup coverage dir
-          mkdir: ~/project/coverage-report
+          command: mkdir ~/project/coverage-report
 
       - run:
           name: Run tests
