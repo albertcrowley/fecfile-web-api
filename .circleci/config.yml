@@ -92,15 +92,21 @@ jobs:
           command: python manage.py migrate
           working_directory: ~/project/django-backend/
 
+
+      - run:
+          name: Run tests
+          # Use built-in Django test module
+          command: coverage run --source='.' manage.py test --keep || echo "test fails"
+          working_directory: ~/project/django-backend/
+
       - run:
           name: setup coverage dir
           command: mkdir ~/project/coverage-report
 
       - run:
-          name: Run tests
-          # Use built-in Django test module
-          command: coverage xml -o ~/project/coverage-report/coverage.xml  --source='.' manage.py test --keep || echo "test fails"
-          working_directory: ~/project/django-backend/
+          name: Make XML coverage report
+          command: coverage xml -o ~/project/coverage-report/coverage.xml
+          working_directory: ~/project/django-backend
 
       - run:
           name: ls testsing
